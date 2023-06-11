@@ -19,6 +19,7 @@
 // }
 
 // // person.role.push('admin');
+/* !!! Array().push is NOT SUPPORTED in Tuple of typescript !!! */
 // // person.role[1] = 10;
 
 // // person.role = [0, 'admin', 'user']
@@ -37,7 +38,9 @@
 //   console.log('is admin');
 // }
 
+/* Alias Type with Union Type */
 // type Combinable = number | string;
+/* Alias Type with Literal Type */
 // type ConversionDescriptor = 'as-number' | 'as-text'
 
 // function combine(input1: Combinable, input2: Combinable, resultConversion: ConversionDescriptor) {
@@ -64,6 +67,26 @@
 
 // const combineName = combine('Toon', 'Tong', 'as-text')
 // console.log(combineName)
+
+/* WITHOUT Alias Type */
+// function greet(user: { name: string; age: number }) {
+//   console.log('Hi, I am ' + user.name);
+// }
+ 
+// function isOlder(user: { name: string; age: number }, checkAge: number) {
+//   return checkAge > user.age;
+// }
+
+/* WITH Alias Type */
+// type User = { name: string; age: number };
+ 
+// function greet(user: User) {
+//   console.log('Hi, I am ' + user.name);
+// }
+ 
+// function isOlder(user: User, checkAge: number) {
+//   return checkAge > user.age;
+// }
 
 function add(n1:number, n2:number) {
   return n1+n2;
