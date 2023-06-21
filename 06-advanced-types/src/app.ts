@@ -36,12 +36,12 @@ type Numeric = number | boolean;
 type Univeral = Combinable & Numeric;
 
 /* ====== Type Guards Concept ====== */
-function add(a: Combinable, b: Combinable) {
-  if(typeof a === 'string' || typeof b === 'string') { /* => type gurads */
-    return a.toString() + b.toString()
-  }
-  return a+b
-}
+// function add(a: Combinable, b: Combinable) {
+//   if(typeof a === 'string' || typeof b === 'string') { /* => type gurads */
+//     return a.toString() + b.toString()
+//   }
+//   return a+b
+// }
 
 type UnknownEmployee = Employee | Admin;
 
@@ -136,3 +136,49 @@ const userInputElement = document.getElementById('user-input')! as HTMLInputElem
 // }
 // (userInputElement as HTMLInputElement).value = 'Hi! there' /* type casting ✔ (without declare in document.something) */
 userInputElement.value = 'Hi! there';
+
+/* ====== Index Properties ====== */
+interface ErrorContainer { // { email: 'Not a valid email!', username: 'Must start with a capital character!' }
+  [prop: string]: string; /* => Index Properties => describe key/property type (usually use for validate form that don't know exactly structure) */
+}
+
+const errorBag: ErrorContainer = {
+  email:'Not a valid email!',
+  username: 'Must start with a capital character!'
+}
+
+/* ====== Function Overloads ====== */
+function add(a:number, b:number): number; // Function Overloads => Add specific type to function with Function Overloads
+function add(a:string, b:string): string; // Function Overloads => Add specific type to function with Function Overloads
+function add(a:string, b:number): string; // Function Overloads => Add specific type to function with Function Overloads
+function add(a:number, b:string): string; // Function Overloads => Add specific type to function with Function Overloads
+function add(a: Combinable, b: Combinable) {
+  if(typeof a === 'string' || typeof b === 'string') { /* => type gurads */
+    return a.toString() + b.toString()
+  }
+  return a+b
+}
+
+const result = add('Toon','Chach');
+// result.split(" "); /* => This won't work without Function Overload */
+
+/* ====== Optional Chaining ====== */
+const fetchedUserData = {
+  id: 'u1',
+  name: 'Toon',
+  job: {
+    title: 'DEV',
+    description: 'My start-up company'
+  }
+}
+
+console.log(fetchedUserData?.job?.title); // Optional Chaining (JS & TS is same)
+
+/* ====== Nullish Coalescing ====== */
+const userInput = ''; // storedData will return '';
+// const userInput = undefined; // storedData will return 'DEFAULT' (because of Nullish Coalescing)
+// const userInput = null; // storedData will return 'DEFAULT' (because of Nullish Coalescing)
+
+const storedData = userInput ?? 'DEFAULT'; // if userInput is null or undefined (only this 2 types will return right value after ?? => JS & TS is same)
+
+console.log(storedData); 
